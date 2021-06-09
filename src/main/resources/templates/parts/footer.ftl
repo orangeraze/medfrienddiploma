@@ -4,9 +4,9 @@
             <div class="col">
                 <h5>С чего начать?</h5>
                 <ul>
-                    <li><a href="#">Домой</a></li>
-                    <li><a href="#">ЧаВо</a></li>
-                    <li><a href="#">О сервисе</a></li>
+                    <li><a href="/">Домой</a></li>
+                    <li><a href="/faq">ЧаВо</a></li>
+                    <li><a href="/about">О сервисе</a></li>
                 </ul>
             </div>
             <div class="col-sm-3">

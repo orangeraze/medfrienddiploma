@@ -15,6 +15,7 @@ public interface UserMapper {
 
     UserBO toUserBO(User user);
 
+    @Mapping(target = "firstName", source = "name")
     User fromUserDTO(UserDTO userDTO);
 
     @Mapping(target = "username", source = "email")
