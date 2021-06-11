@@ -1,6 +1,6 @@
 <#import "parts/common.ftl" as common>
 <@common.page>
-    <main class="page analysis">
+    <main class="page showAnalysis">
         <section class="clean-block clean-form dark" style="width: 100vw;height: 90vh;">
             <div class="container" style="box-shadow: 0px 0px;">
                 <div class="block-heading" style="padding-top: 20px;"></div>
@@ -10,8 +10,15 @@
                             <span>Ошибка при добавлении анализа: ${errorMessage}</span></div>
                     </#list>
                 </#if>
-                <div style="padding: 15px;box-shadow: 0px 0px 6px 1px rgba(33,37,41,0.16);border-radius: 4px;">
+                <#if !(analyzes?? && (analyzes?size > 0))>
+                    <div role="alert" class="alert alert-warning">
+                        <span>У вас ещё нет анализов. Для добавления, нажмите на кнопку
+                            &quot;Добавить анализ&quot;</span>
+                    </div>
+                </#if>
 
+                <div style="padding: 15px;box-shadow: 0px 0px 6px 1px rgba(33,37,41,0.16);border-radius: 4px;">
+                    <a class="btn btn-primary" role="button" href="/analysis">Назад</a>
                     <#if analyzes?? && (analyzes?size > 0)>
 
                         <div class="table-responsive table" id="table" style="border-radius: 4px;margin-top: 16px;">
@@ -29,11 +36,9 @@
                                     <tr>
                                         <td class="table-primary"
                                             style="max-width: 155px;border-radius: 4px;background: linear-gradient(90deg, var(--bs-table-bg) 90%, rgba(255,255,255,0) 100%);"
-                                            back>
-                                            <a href="/analysis/name?name=${analysis.name}"><strong>${analysis.name}</strong></a>
-                                        </td>
+                                            back><strong>${analysis.name}</strong></td>
                                         <td style="max-width: 65px;">${analysis.value} ${analysis.unit}</td>
-                                        <td style="max-width: 65px;">${analysis.norm}</td>
+                                        <td style="max-width: 65px;">${analysis.norm!"Не указана"}</td>
                                         <td style="max-width: 65px;">${analysis.date!"Не указана"}</td>
                                     </tr>
                                 </#list>
@@ -43,29 +48,61 @@
                     <#--                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showGraph" type="button"-->
                     <#--                                style="margin-left: 12px;">Показать график-->
                     <#--                        </button>-->
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showGraph"
+                                type="button">Показать график
+                        </button>
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addAnalysis"
+                                type="button" style="margin-left: 12px;">Добавить анализ
+                        </button>
+
                     <#else>
-                        <div role="alert" class="alert alert-warning">
-                                <span>У вас ещё нет анализов. Для добавления, нажмите на кнопку
-                                    &quot;Добавить анализ&quot;</span>
-                        </div>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAnalysis"
+                                type="button"
+                                style="margin-left: 12px;">Добавить анализ
+                        </button>
                     </#if>
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addAnalysis" type="button">
-                        Добавить анализ
-                    </button>
                 </div>
             </div>
         </section>
         <div class="modal fade" role="dialog" tabindex="-1" id="showGraph">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
-                    <div class="modal-header text-center"><label class="form-label modal-title w-100"
+                    <div class="modal-header text-center" style="border-bottom-style: none;"><label class="form-label modal-title w-100"
                                                                  style="font-size: 27px;"><strong>График анализа
-                                "Гемоглобин"</strong></label>
+                                "${RequestParameters.name}"</strong></label>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="container">
-                        <div style="margin-bottom: 16px;padding-bottom: 16px;">
-                            <canvas data-bss-chart="{&quot;type&quot;:&quot;line&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Дата 1&quot;,&quot;Дата 2&quot;,&quot;Дата 3&quot;,&quot;Дата 4&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;Значение&quot;,&quot;backgroundColor&quot;:&quot;#0d6efd&quot;,&quot;borderColor&quot;:&quot;#4e73df&quot;,&quot;data&quot;:[&quot;70&quot;,&quot;90&quot;,&quot;70&quot;,&quot;100&quot;,&quot;40&quot;],&quot;fill&quot;:true},{&quot;label&quot;:&quot;Норма&quot;,&quot;fill&quot;:true,&quot;data&quot;:[&quot;100&quot;,&quot;100&quot;,&quot;120&quot;,&quot;110&quot;],&quot;borderWidth&quot;:&quot;&quot;,&quot;backgroundColor&quot;:&quot;rgba(42,210,0,0.1)&quot;,&quot;borderColor&quot;:&quot;rgba(42,210,0,0.1)&quot;}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:true,&quot;position&quot;:&quot;top&quot;,&quot;reverse&quot;:false},&quot;title&quot;:{&quot;display&quot;:false,&quot;text&quot;:&quot;Анализ&quot;,&quot;fontSize&quot;:&quot;27&quot;},&quot;scales&quot;:{&quot;xAxes&quot;:[{&quot;gridLines&quot;:{&quot;drawBorder&quot;:true,&quot;drawOnChartArea&quot;:true},&quot;ticks&quot;:{&quot;beginAtZero&quot;:false}}],&quot;yAxes&quot;:[{&quot;gridLines&quot;:{&quot;drawBorder&quot;:true,&quot;drawOnChartArea&quot;:true},&quot;ticks&quot;:{&quot;beginAtZero&quot;:false}}]}}}"></canvas>
+                        <div id="chart">
+                            <script>
+                                $(document).on('shown.bs.modal', "#showGraph", function () {
+                                    $("#chart").shieldChart({
+                                        theme: "light",
+                                        primaryHeader: {
+                                            text: ""
+                                        },
+                                        exportOptions: {
+                                            image: false,
+                                            print: false
+                                        },
+                                        axisX: {
+                                            categoricalValues: [${dateList?join(", ")}]
+                                        },
+                                        tooltipSettings: {
+                                            chartBound: true,
+                                            axisMarkers: {
+                                                enabled: true,
+                                                mode: 'xy'
+                                            }
+                                        },
+                                        dataSeries: [{
+                                            seriesType: 'line',
+                                            collectionAlias: "Значение анализа",
+                                            data: [${valueList?join(", ")}]
+                                        }]
+                                    });
+                                });
+                            </script><!-- /.График -->
                         </div>
                     </div>
                 </div>
@@ -81,9 +118,14 @@
                     <div class="modal-body">
                         <form action="/analysis" method="post">
                             <div>
+                                <#if RequestParameters.name?exists >
+                                    <input type="hidden" name="name" value="${RequestParameters.name}"/>
+                                <#else>
+                                    <input class="form-control" type="text"
+                                           placeholder="Название"
+                                           style="margin-bottom: 12px;"
+                                           name="name">                                </#if>
                                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                                <input class="form-control" type="text" placeholder="Название"
-                                       style="margin-bottom: 12px;" name="name">
                                 <input class="form-control" type="text"
                                        placeholder="Значение"
                                        style="margin-bottom: 12px;"

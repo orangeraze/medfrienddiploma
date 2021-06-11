@@ -9,6 +9,8 @@ import ru.orangeraze.entity.User;
 import ru.orangeraze.mapper.UserMapper;
 import ru.orangeraze.repository.UserRepository;
 
+import java.util.UUID;
+
 
 @Service
 @RequiredArgsConstructor
@@ -26,5 +28,9 @@ public class UserService {
 
 
         return UserMapper.INSTANCE.toUserBO(userRepository.save(newUser));
+    }
+
+    public User getById(UUID id) {
+        return userRepository.findById(id).get();
     }
 }

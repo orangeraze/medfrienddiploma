@@ -9,7 +9,7 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-sm-6 col-lg-4">
-                        <div class="card text-center clean-card"><img class="card-img-top w-100 d-block" src="assets/img/avatars/IMG_3827.png">
+                        <div class="card text-center clean-card"><img class="card-img-top w-100 d-block" src="/static/assets/img/avatars/IMG_3827.png">
                             <div class="card-body info">
                                 <h4 class="card-title">Эмиль Игнатьев</h4>
                                 <p class="card-text">Разработчик</p>

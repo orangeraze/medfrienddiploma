@@ -28,6 +28,5 @@ public class IndexController {
         return "faq";
     }
 
-    @GetMapping("/analysis")
-    public String analysis() {return "analysis"; }
+
 }

@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.orangeraze.service.UserDetailsServiceImplementation;
+import ru.orangeraze.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -16,7 +16,7 @@ import ru.orangeraze.service.UserDetailsServiceImplementation;
 @RequiredArgsConstructor
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailsServiceImplementation userService;
+    private final UserDetailsServiceImpl userService;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -24,12 +24,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/registration", "/features", "/about", "/", "/faq", "/static/**", "/activate/*")
+                .antMatchers("/registration", "/features", "/about", "/", "/faq", "/static/**", "/activate/*", "/static/assets/img/tech/image1.jpg")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin().loginPage("/login")
+                .formLogin().loginPage("/login").defaultSuccessUrl("/")
                 .permitAll()
                 .and()
                 .logout()

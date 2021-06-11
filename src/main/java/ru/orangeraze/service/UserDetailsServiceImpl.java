@@ -11,7 +11,7 @@ import ru.orangeraze.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor
-public class UserDetailsServiceImplementation implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
 

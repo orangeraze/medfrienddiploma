@@ -16,15 +16,19 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
         <link rel="stylesheet" href="../static/assets/css/vanilla-zoom.min.css">
+        <link type="text/css" rel="StyleSheet" href="https://bootstraptema.ru/plugins/2016/shieldui/style.css"/>
+        <script src="../static/assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../static/assets/js/bs-init.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+        <script src="../static/assets/js/vanilla-zoom.js"></script>
+        <script src="../static/assets/js/theme.js"></script>
+        <script src="https://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
+        <script src="https://bootstraptema.ru/plugins/2016/shieldui/script.js"></script>
     </head>
     <body>
     <#include "navbar.ftl">
     <#nested>
-    <script src="../static/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../static/assets/js/bs-init.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-    <script src="../static/assets/js/vanilla-zoom.js"></script>
-    <script src="../static/assets/js/theme.js"></script>
+
     </body>
     </html>
 </#macro>

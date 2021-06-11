@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -24,4 +25,11 @@ public class Analysis extends IdentifiableEntity {
 
     @Column(name = "norm")
     private String norm;
+
+    @Column(name = "date")
+    private LocalDate date;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "\"user\"")
+    private User user;
 }
