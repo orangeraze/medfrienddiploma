@@ -35,4 +35,6 @@ public class User extends IdentifiableEntity {
     @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Appointment> appointmentList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Chronology> chronologyList = new ArrayList<>();
 }

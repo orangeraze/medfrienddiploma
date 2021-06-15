@@ -15,7 +15,9 @@ public class AnalysisBO {
 
     private String unit;
 
-    private String norm;
+    private String minnorm;
+
+    private String maxnorm;
 
     private LocalDate date;
 

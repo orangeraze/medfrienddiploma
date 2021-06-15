@@ -32,8 +32,8 @@
                                             back>
                                             <a href="/analysis/name?name=${analysis.name}"><strong>${analysis.name}</strong></a>
                                         </td>
-                                        <td style="max-width: 65px;">${analysis.value} ${analysis.unit}</td>
-                                        <td style="max-width: 65px;">${analysis.norm}</td>
+                                        <td style="max-width: 65px;">${analysis.value}</td>
+                                        <td style="max-width: 65px;">${analysis.minnorm}-${analysis.maxnorm} ${analysis.unit}</td>
                                         <td style="max-width: 65px;">${analysis.date!"Не указана"}</td>
                                     </tr>
                                 </#list>
@@ -49,9 +49,12 @@
                                     &quot;Добавить анализ&quot;</span>
                         </div>
                     </#if>
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addAnalysis" type="button">
-                        Добавить анализ
-                    </button>
+                    <div>
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addAnalysis"
+                                type="button" style="margin-top: 12px;margin-bottom: 12px;margin-right: 12px;">Добавить
+                            анализ
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -92,9 +95,13 @@
                                         class="form-control" type="text" placeholder="Единица измерения"
                                         style="margin-bottom: 12px;" name="unit">
                                 <input class="form-control" type="text"
-                                       placeholder="Норма"
+                                       placeholder="Минимальное значение нормы"
                                        style="margin-bottom: 12px;"
-                                       name="norm">
+                                       name="minnorm">
+                                <input class="form-control" type="text"
+                                       placeholder="Максимальное значение нормы"
+                                       style="margin-bottom: 12px;"
+                                       name="maxnorm">
                                 <input class="form-control" type="date"
                                        name="date" style="margin-bottom: 12px;"/>
                             </div>

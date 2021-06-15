@@ -2,10 +2,8 @@ package ru.orangeraze.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Entity
@@ -23,8 +21,11 @@ public class Analysis extends IdentifiableEntity {
     @Column(name = "unit")
     private String unit;
 
-    @Column(name = "norm")
-    private String norm;
+    @Column(name = "minnorm")
+    private String minnorm;
+
+    @Column(name = "maxnorm")
+    private String maxnorm;
 
     @Column(name = "date")
     private LocalDate date;

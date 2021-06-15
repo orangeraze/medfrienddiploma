@@ -23,8 +23,11 @@ public class AnalysisDTO {
     @Length(max = 20, message = "Поле \"Единица измерения\" не может быть больше 20 символов")
     private String unit;
 
-    @Length(max = 250, message = "Поле \"Норма\" не может быть больше 250 символов")
-    private String norm;
+    @Length(max = 250, message = "Поле \"Минимальная норма\" не может быть больше 250 символов")
+    private String minnorm;
+
+    @Length(max = 250, message = "Поле \"Максимальная норма\" не может быть больше 250 символов")
+    private String maxnorm;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;

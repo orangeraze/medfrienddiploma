@@ -22,8 +22,8 @@ public class Appointment extends IdentifiableEntity {
     @Column(name = "latitude")
     private Double latitude;
 
-    @Column(name = "longtitude")
-    private Double longtitude;
+    @Column(name = "longitude")
+    private Double longitude;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "\"user\"")

@@ -38,7 +38,8 @@
                                             style="max-width: 155px;border-radius: 4px;background: linear-gradient(90deg, var(--bs-table-bg) 90%, rgba(255,255,255,0) 100%);"
                                             back><strong>${analysis.name}</strong></td>
                                         <td style="max-width: 65px;">${analysis.value} ${analysis.unit}</td>
-                                        <td style="max-width: 65px;">${analysis.norm!"Не указана"}</td>
+                                        <td style="max-width: 65px;">${analysis.minnorm}
+                                            -${analysis.maxnorm} ${analysis.unit}</td>
                                         <td style="max-width: 65px;">${analysis.date!"Не указана"}</td>
                                     </tr>
                                 </#list>
@@ -48,17 +49,21 @@
                     <#--                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showGraph" type="button"-->
                     <#--                                style="margin-left: 12px;">Показать график-->
                     <#--                        </button>-->
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showGraph"
-                                type="button">Показать график
-                        </button>
-                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addAnalysis"
-                                type="button" style="margin-left: 12px;">Добавить анализ
-                        </button>
+                        <div>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showGraph"
+                                    type="button" style="margin-top: 12px;margin-bottom: 12px;margin-right: 12px;">
+                                Показать график
+                            </button>
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addAnalysis"
+                                    type="button" style="margin-top: 12px;margin-bottom: 12px;margin-right: 12px;">
+                                Добавить анализ
+                            </button>
+                        </div>
 
                     <#else>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAnalysis"
-                                type="button"
-                                style="margin-left: 12px;">Добавить анализ
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addAnalysis"
+                                type="button" style="margin-top: 12px;margin-bottom: 12px;margin-right: 12px;">
+                            Добавить анализ
                         </button>
                     </#if>
                 </div>
@@ -67,39 +72,94 @@
         <div class="modal fade" role="dialog" tabindex="-1" id="showGraph">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
-                    <div class="modal-header text-center" style="border-bottom-style: none;"><label class="form-label modal-title w-100"
-                                                                 style="font-size: 27px;"><strong>График анализа
-                                "${RequestParameters.name}"</strong></label>
+                    <div class="modal-header text-center" style="border-bottom-style: none;">
+                                                <label
+                                                        class="form-label modal-title w-100"
+                                                        style="font-size: 27px;"><strong>График анализа</strong></label>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="container">
-                        <div id="chart">
-                            <script>
+                        <div id="container">
+                            <script type="text/javascript">
                                 $(document).on('shown.bs.modal', "#showGraph", function () {
-                                    $("#chart").shieldChart({
-                                        theme: "light",
-                                        primaryHeader: {
-                                            text: ""
+                                    Highcharts.setOptions({
+                                        lang: {
+                                            loading: 'Загрузка...',
+                                            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                                            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+                                            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+                                            exportButtonTitle: "Экспорт",
+                                            printButtonTitle: "Печать",
+                                            rangeSelectorFrom: "С",
+                                            rangeSelectorTo: "По",
+                                            rangeSelectorZoom: "Период",
+                                            downloadPNG: 'Скачать PNG',
+                                            downloadJPEG: 'Скачать JPEG',
+                                            downloadCSV: "Скачать CSV",
+                                            downloadXLS: "Скачать XLS",
+                                            downloadPDF: 'Скачать PDF',
+                                            downloadSVG: 'Скачать SVG',
+                                            printChart: 'Напечатать график',
+                                            viewData: 'Показать таблицу данных',
+                                            hideData: 'Скрыть таблицу данных',
+                                            viewFullscreen: 'Показать на полный экран'
+
+                                        }
+                                    });
+                                    Highcharts.chart('container', {
+                                        chart: {
+                                            type: 'areaspline'
                                         },
-                                        exportOptions: {
-                                            image: false,
-                                            print: false
+                                        title: {
+                                            text: "${RequestParameters.name}"
                                         },
-                                        axisX: {
-                                            categoricalValues: [${dateList?join(", ")}]
+                                        legend: {
+                                            layout: 'vertical',
+                                            align: 'left',
+                                            verticalAlign: 'top',
+                                            x: 150,
+                                            y: 100,
+                                            floating: true,
+                                            borderWidth: 1,
+                                            backgroundColor:
+                                                Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF'
                                         },
-                                        tooltipSettings: {
-                                            chartBound: true,
-                                            axisMarkers: {
-                                                enabled: true,
-                                                mode: 'xy'
+                                        xAxis: {
+                                            title: {
+                                                text: 'Дата'
+                                            },
+                                            categories: [${dateList?join(", ")}]
+                                        },
+                                        yAxis: {
+                                            title: {
+                                                text: 'Значение'
+                                            },
+                                            plotBands: [{
+                                                from: ${minNormList[0]},
+                                                to: ${maxNormList[0]},
+                                                color: 'rgba(207,226,255,0.5)',
+                                                label: {
+                                                    text: 'Норма',
+                                                    style: {
+                                                        color: '#606060'
+                                                    }
+                                                }
+                                            }]
+                                        },
+                                        credits: {
+                                            enabled: false
+                                        },
+                                        plotOptions: {
+                                            areaspline: {
+                                                fillOpacity: 0.5
                                             }
                                         },
-                                        dataSeries: [{
-                                            seriesType: 'line',
-                                            collectionAlias: "Значение анализа",
-                                            data: [${valueList?join(", ")}]
-                                        }]
+                                        series: [
+                                            {
+                                                name: 'Значение',
+                                                color: 'rgb(11,94,215)',
+                                                data: [${valueList?join(", ")}]
+                                            }]
                                     });
                                 });
                             </script><!-- /.График -->

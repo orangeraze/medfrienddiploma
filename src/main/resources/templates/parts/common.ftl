@@ -8,11 +8,11 @@
         <title>Home - MedFriend</title>
         <meta name="description" content="Сайт для хранения данных о здоровье себя и семьи">
         <link rel="stylesheet" href="../static/assets/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
         <link rel="stylesheet" href="../static/assets/fonts/fontawesome-all.min.css">
         <link rel="stylesheet" href="../static/assets/fonts/simple-line-icons.min.css">
         <link rel="stylesheet" href="../static/assets/fonts/typicons.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
         <link rel="stylesheet" href="../static/assets/css/vanilla-zoom.min.css">
@@ -24,6 +24,10 @@
         <script src="../static/assets/js/theme.js"></script>
         <script src="https://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
         <script src="https://bootstraptema.ru/plugins/2016/shieldui/script.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     </head>
     <body>
     <#include "navbar.ftl">

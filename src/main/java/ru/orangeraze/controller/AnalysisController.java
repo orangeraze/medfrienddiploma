@@ -42,12 +42,18 @@ public class AnalysisController {
         model.addAttribute("analyzes", analyzes);
         List<String> dateList = new ArrayList<>(analyzes.size());
         List<String> valueList = new ArrayList<>(analyzes.size());
+        List<String> minNormList = new ArrayList<>(analyzes.size());
+        List<String> maxNormList = new ArrayList<>(analyzes.size());
         analyzes.stream().sorted(Comparator.comparing(AnalysisBO::getDate)).forEach(analysisBO -> {
             dateList.add("\"" + analysisBO.getDate().toString() + "\"");
             valueList.add(analysisBO.getValue());
+            minNormList.add(analysisBO.getMinnorm());
+            maxNormList.add(analysisBO.getMaxnorm());
         });
         model.addAttribute("dateList", dateList);
         model.addAttribute("valueList", valueList);
+        model.addAttribute("minNormList", minNormList);
+        model.addAttribute("maxNormList", maxNormList);
         return "/showAnalysis";
     }
 
