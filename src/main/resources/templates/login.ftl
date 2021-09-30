@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="block-heading">
                     <h2 class="text-info">Вход</h2>
-                    <p>Чтобы пользоваться всеми возможностями сервиса, пожалуйста, войдите</p>
+                    <p>Чтобы пользоваться всеми возможностями сервиса, пожалуйста, авторизуйтесь</p>
                 </div>
                 <form action="/login" method="post">
                     <input type="hidden" name="_csrf" value="${_csrf.token}"/>

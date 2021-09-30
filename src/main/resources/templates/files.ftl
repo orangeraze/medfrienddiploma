@@ -1,91 +1,81 @@
 <#import "parts/common.ftl" as common>
 <@common.page>
-    <main class="page chronology">
+    <main class="page files">
         <section class="clean-block clean-form dark" style="width: 100vw;height: 90vh;">
             <div class="container" style="box-shadow: 0px 0px;">
                 <div class="block-heading" style="padding-top: 20px;"></div>
                 <#if errorMessages?? && (errorMessages?size > 0)>
                     <#list errorMessages as errorMessage>
                         <div role="alert" class="alert alert-danger">
-                            <span>Ошибка при добавлении хронологии: ${errorMessage}</span></div>
+                            <span>Ошибка при добавлении файла: ${errorMessage}</span></div>
                     </#list>
                 </#if>
-
                 <div style="padding: 15px;box-shadow: 0px 0px 6px 1px rgba(33,37,41,0.16);border-radius: 4px;">
 
-
-                    <#if chronologies?? && (chronologies?size > 0)>
+                    <#if files?? && (files?size > 0)>
 
                         <div class="table-responsive table" id="table" style="border-radius: 4px;margin-top: 16px;">
                             <table class="table" id="table">
                                 <thead>
                                 <tr class="table-primary">
-                                    <th class="table-secondary" style="width: 25%;">Болезнь</th>
-                                    <th class="table-secondary" style="width: 25%;max-width: 33%">Текст</th>
-                                    <th class="table-secondary" style="width: 25%;">Дата</th>
+                                    <th class="table-secondary">Имя файла</th>
+                                    <th class="table-secondary">Тип</th>
+                                    <th class="table-secondary">Дата</th>
                                 </tr>
                                 </thead>
                                 <tbody id="tableBody">
-
-                                <#list chronologies as chronology>
+                                <#list files as file>
                                     <tr>
                                         <td class="table-primary"
                                             style="max-width: 155px;border-radius: 4px;background: linear-gradient(90deg, var(--bs-table-bg) 90%, rgba(255,255,255,0) 100%);"
                                             back>
-                                            <strong>${chronology.disease}</strong>
+                                            <a href="/files/${file.id}"><strong>${file.name}</strong></a>
                                         </td>
-                                        <td style="max-width: 65px;  text-wrap: normal; word-wrap: break-word; white-space: pre-wrap;">${chronology.text!"Не указан"}</td>
-
-                                        <td style="max-width: 65px;">C ${chronology.startdate!"-"} по ${chronology.enddate!"-"}</td>
-
+                                        <td style="max-width: 65px;">Картинка</td>
+                                        <td style="max-width: 65px;">${file.date!"${.now?date?string.iso}"}</td>
                                     </tr>
                                 </#list>
-
                                 </tbody>
                             </table>
                         </div>
-
+                    <#--                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showGraph" type="button"-->
+                    <#--                                style="margin-left: 12px;">Показать график-->
+                    <#--                        </button>-->
                     <#else>
                         <div role="alert" class="alert alert-warning">
-                                <span>У вас ещё нет данных о болезнях. Для добавления, нажмите на кнопку
-                                    &quot;Добавить хронологию&quot;</span>
+                                <span>У вас ещё нет файлов. Для добавления, нажмите на кнопку
+                                    &quot;Добавить файл&quot;</span>
                         </div>
                     </#if>
                     <div>
-                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addChronology"
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addFile"
                                 type="button" style="margin-top: 12px;margin-bottom: 12px;margin-right: 12px;">Добавить
-                            хронологию
+                            файл
                         </button>
                     </div>
                 </div>
             </div>
         </section>
-        <div class="modal fade" role="dialog" tabindex="-1" id="addChronology">
+        <div class="modal fade" role="dialog" tabindex="-1" id="addFile">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Добавить запись</h4>
+                        <h4 class="modal-title">Добавить файл</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="/chronology" method="post">
-                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                            <div class="mb-3">
-                                <input class="form-control" type="text" style="margin-bottom: 12px;" name="disease" placeholder="Болезнь">
+                        <form action="/files" method="post" enctype="multipart/form-data">
+                            <div>
+                                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                                <input type="file" name="file"/>
                             </div>
-                            <div class="mb-3"><textarea class="form-control" name="text"></textarea></div>
-                            <div class="mb-3" style="margin-top: 12px;"><input class="form-control"
-                                                                               type="date" name="startdate"
-                                                                               style="margin-bottom: 12px;"></div>
-                            <div class="mb-3" style="margin-top: 12px;"><input class="form-control"
-                                                                               type="date" name="enddate"
-                                                                               style="margin-bottom: 12px;"></div>
                             <div class="modal-footer">
                                 <button class="btn btn-light" type="button" data-bs-dismiss="modal">Закрыть</button>
                                 <button class="btn btn-primary" type="submit">Добавить</button>
                             </div>
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>

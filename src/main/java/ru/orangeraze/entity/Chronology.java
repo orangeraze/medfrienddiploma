@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class Chronology extends IdentifiableEntity {
 
     @Column(name = "disease")
-    private String name;
+    private String disease;
 
     @Column(name = "text")
     private String text;

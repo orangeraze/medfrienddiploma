@@ -18,7 +18,8 @@
                 </#if>
 
                 <div style="padding: 15px;box-shadow: 0px 0px 6px 1px rgba(33,37,41,0.16);border-radius: 4px;">
-                    <a class="btn btn-primary" role="button" href="/analysis">Назад</a>
+                    <a class="btn btn-primary" role="button" href="/analysis" style="margin-right: 12px";>Назад</a>
+                    <a class="btn btn-primary" role="button" href="/files" style="margin-right: 12px";>Файлы</a>
                     <#if analyzes?? && (analyzes?size > 0)>
 
                         <div class="table-responsive table" id="table" style="border-radius: 4px;margin-top: 16px;">
@@ -194,9 +195,13 @@
                                         class="form-control" type="text" placeholder="Единица измерения"
                                         style="margin-bottom: 12px;" name="unit">
                                 <input class="form-control" type="text"
-                                       placeholder="Норма"
+                                       placeholder="Минимальное значение нормы"
                                        style="margin-bottom: 12px;"
-                                       name="norm">
+                                       name="minnorm">
+                                <input class="form-control" type="text"
+                                       placeholder="Максимальное значение нормы"
+                                       style="margin-bottom: 12px;"
+                                       name="maxnorm">
                                 <input class="form-control" type="date"
                                        name="date" style="margin-bottom: 12px;"/>
                             </div>

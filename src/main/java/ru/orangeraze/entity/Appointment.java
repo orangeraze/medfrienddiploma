@@ -29,4 +29,8 @@ public class Appointment extends IdentifiableEntity {
     @JoinColumn(name = "\"user\"")
     private User user;
 
+    @Column(name = "address")
+    private String address;
+
+
 }

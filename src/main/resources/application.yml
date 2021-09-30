@@ -10,7 +10,12 @@ spring:
     show-sql: true
     hibernate.ddl-auto: validate
     properties.hibernate.jdbc.lob.non_contextual_creation: true
+    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
   session:
     jdbc:
       initialize-schema: always
       table-name: SPRING_SESSION
+  servlet:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB

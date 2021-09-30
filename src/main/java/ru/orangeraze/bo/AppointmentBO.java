@@ -10,12 +10,14 @@ import java.time.LocalDateTime;
 @Setter
 public class AppointmentBO {
 
-    private LocalDateTime time;
+    private String time;
 
     private String doctor;
 
     private Double latitude;
 
     private Double longitude;
+
+    private String address;
 
 }
